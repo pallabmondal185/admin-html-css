@@ -1,6 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Form = () => {
+    const initValue = {
+        fname: "",
+        lname: "",
+        email: "",
+        phone: "",
+        city: "",
+        pincode: "",
+        gender: "",
+        qualification: ""
+    }
+    const [formValue, setFormValue] = useState(initValue);
+
+    console.log("formValue", formValue)
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormValue(prev => ({ ...prev, [name]: value }))
+    }
+
     return (
         <div className='custom-container'>
             <div className='form-heading'>
@@ -12,14 +31,22 @@ const Form = () => {
                         <div className='input-group'>
                             <label className='form-label'>First Name:</label>
                             <input
+                                type='text'
                                 className='form-input'
+                                name='fname'
+                                value={formValue.fname}
+                                onChange={(e) => handleChange(e)}
                             />
                         </div>
 
                         <div className='input-group'>
                             <label className='form-label'>Last Name:</label>
                             <input
+                                type='text'
                                 className='form-input'
+                                name='lname'
+                                value={formValue.lname}
+                                onChange={(e) => handleChange(e)}
                             />
                         </div>
                     </div>
@@ -28,14 +55,22 @@ const Form = () => {
                         <div className='input-group'>
                             <label className='form-label'>Email:</label>
                             <input
+                                type='text'
                                 className='form-input'
+                                name='email'
+                                value={formValue.email}
+                                onChange={(e) => handleChange(e)}
                             />
                         </div>
 
                         <div className='input-group'>
                             <label className='form-label'>Phone No:</label>
                             <input
+                                type='text'
                                 className='form-input'
+                                name='phone'
+                                value={formValue.phone}
+                                onChange={(e) => handleChange(e)}
                             />
                         </div>
                     </div>
@@ -44,14 +79,22 @@ const Form = () => {
                         <div className='input-group'>
                             <label className='form-label'>City:</label>
                             <input
+                                type='text'
                                 className='form-input'
+                                name='city'
+                                value={formValue.city}
+                                onChange={(e) => handleChange(e)}
                             />
                         </div>
 
                         <div className='input-group'>
                             <label className='form-label'>PinCode No:</label>
                             <input
+                                type='text'
                                 className='form-input'
+                                name='pincode'
+                                value={formValue.pincode}
+                                onChange={(e) => handleChange(e)}
                             />
                         </div>
                     </div>
@@ -62,16 +105,22 @@ const Form = () => {
                             <input
                                 type='radio'
                                 name='gender'
+                                value="Male"
+                                onChange={(e) => handleChange(e)}
                             />
                             <label>Male</label>
                             <input
                                 type='radio'
                                 name='gender'
+                                value={"Female"}
+                                onChange={(e) => handleChange(e)}
                             />
                             <label>Female</label>
                             <input
                                 type='radio'
                                 name='gender'
+                                value="Other"
+                                onChange={(e) => handleChange(e)}
                             />
                             <label>Other</label>
                         </div>
@@ -80,11 +129,14 @@ const Form = () => {
                             <label className='form-label'>Qualification:</label>
                             <select
                                 className='form-input-select'
+                                name='qualification'
+                                value={formValue.qualification}
+                                onChange={(e) => handleChange(e)}
                             >
-                                <option>B.Tech</option>
-                                <option>B.Sc</option>
-                                <option>M.Tech</option>
-                                <option>M.Sc</option>
+                                <option value={"B.Tech"}>B.Tech</option>
+                                <option value={"B.Sc"}>B.Sc</option>
+                                <option value={"M.Tech"}>M.Tech</option>
+                                <option value={"M.Sc"}>M.Sc</option>
                             </select>
                         </div>
                     </div>
