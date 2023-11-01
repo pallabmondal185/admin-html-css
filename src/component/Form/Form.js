@@ -20,6 +20,31 @@ const Form = () => {
         setFormValue(prev => ({ ...prev, [name]: value }))
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const sendData = {
+            "firstName": formValue.fname,
+            "lastName": formValue.lname,
+            "email": formValue.email,
+            "phoneNo": formValue.phone,
+            "city": formValue.city,
+            "pinCode": formValue.pincode,
+            "gender": formValue.gender,
+            "image": formValue.qualification
+        }
+        console.log("sendData", sendData)
+        const response = await fetch("http://127.0.0.1:5041/api/add-form", {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(sendData)
+        });
+        const data = await response.json()
+        console.log("respp", data)
+    }
+
     return (
         <div className='custom-container'>
             <div className='form-heading'>
@@ -145,7 +170,7 @@ const Form = () => {
                         <button
                             type='submit'
                             className='submit-button'
-                            onClick={(e) => e.preventDefault()}
+                            onClick={(e) => handleSubmit(e)}
                         >
                             Submit
                         </button>
