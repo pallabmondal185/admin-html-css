@@ -12,37 +12,66 @@ const Form = () => {
         qualification: ""
     }
     const [formValue, setFormValue] = useState(initValue);
+    const [formError, setFormError] = useState({});
 
-    console.log("formValue", formValue)
-
+    // onchange 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValue(prev => ({ ...prev, [name]: value }))
     }
 
+    // validate
+    const validate = () => {
+        let error = {};
+
+        if (!formValue.fname) error.fname = "First Name is Required";
+        if (!formValue.lname) error.lname = "Last Name is Required";
+        if (!formValue.email) error.email = "Email is Required";
+        if (!formValue.phone) error.phone = "Phone No is Required";
+        if (!formValue.city) error.city = "City is Required";
+        if (!formValue.pincode) error.pincode = "Pin Code is Required";
+        if (!formValue.gender) error.gender = "Gender is Required";
+        if (!formValue.qualification) error.qualification = "Qualification is Required";
+
+        if (Object.keys(error).length !== 0) {
+            setFormError(error);
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    // submitb 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const sendData = {
-            "firstName": formValue.fname,
-            "lastName": formValue.lname,
-            "email": formValue.email,
-            "phoneNo": formValue.phone,
-            "city": formValue.city,
-            "pinCode": formValue.pincode,
-            "gender": formValue.gender,
-            "image": formValue.qualification
+
+        if (validate()) {
+            return
         }
-        console.log("sendData", sendData)
-        const response = await fetch("http://127.0.0.1:5041/api/add-form", {
-            method: "POST",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(sendData)
-        });
-        const data = await response.json()
-        console.log("respp", data)
+
+        console.log("success", formValue);
+
+        // const sendData = {
+        //     "firstName": formValue.fname,
+        //     "lastName": formValue.lname,
+        //     "email": formValue.email,
+        //     "phoneNo": formValue.phone,
+        //     "city": formValue.city,
+        //     "pinCode": formValue.pincode,
+        //     "gender": formValue.gender,
+        //     "image": formValue.qualification
+        // }
+        // const response = await fetch("http://127.0.0.1:5041/api/add-form", {
+        //     method: "POST",
+        //     mode: "cors",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(sendData)
+        // });
+        // const data = await response.json()
+        // console.log("respp", data)
     }
 
     return (
@@ -62,6 +91,7 @@ const Form = () => {
                                 value={formValue.fname}
                                 onChange={(e) => handleChange(e)}
                             />
+                            <p className='form-error-msg'>{formError.fname}</p>
                         </div>
 
                         <div className='input-group'>
@@ -73,6 +103,7 @@ const Form = () => {
                                 value={formValue.lname}
                                 onChange={(e) => handleChange(e)}
                             />
+                            <p className='form-error-msg'>{formError.lname}</p>
                         </div>
                     </div>
 
@@ -86,6 +117,7 @@ const Form = () => {
                                 value={formValue.email}
                                 onChange={(e) => handleChange(e)}
                             />
+                            <p className='form-error-msg'>{formError.email}</p>
                         </div>
 
                         <div className='input-group'>
@@ -97,6 +129,7 @@ const Form = () => {
                                 value={formValue.phone}
                                 onChange={(e) => handleChange(e)}
                             />
+                            <p className='form-error-msg'>{formError.phone}</p>
                         </div>
                     </div>
 
@@ -110,6 +143,7 @@ const Form = () => {
                                 value={formValue.city}
                                 onChange={(e) => handleChange(e)}
                             />
+                            <p className='form-error-msg'>{formError.city}</p>
                         </div>
 
                         <div className='input-group'>
@@ -121,6 +155,7 @@ const Form = () => {
                                 value={formValue.pincode}
                                 onChange={(e) => handleChange(e)}
                             />
+                            <p className='form-error-msg'>{formError.pincode}</p>
                         </div>
                     </div>
 
@@ -148,6 +183,7 @@ const Form = () => {
                                 onChange={(e) => handleChange(e)}
                             />
                             <label>Other</label>
+                            <p className='form-error-msg'>{formError.gender}</p>
                         </div>
 
                         <div className='input-group'>
@@ -158,11 +194,13 @@ const Form = () => {
                                 value={formValue.qualification}
                                 onChange={(e) => handleChange(e)}
                             >
+                                <option value={""}>Select</option>
                                 <option value={"B.Tech"}>B.Tech</option>
                                 <option value={"B.Sc"}>B.Sc</option>
                                 <option value={"M.Tech"}>M.Tech</option>
                                 <option value={"M.Sc"}>M.Sc</option>
                             </select>
+                            <p className='form-error-msg'>{formError.qualification}</p>
                         </div>
                     </div>
 
