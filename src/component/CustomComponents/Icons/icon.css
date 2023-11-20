@@ -1,0 +1,28 @@
+/* for right arrow icon */
+.arrow-right {
+    border: solid #000000;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+/* for left arrow icon */
+.arrow-left {
+    border: solid #000000;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+/* for three line icon */
+.three-line-menu {
+    background-color: #ddd;
+    margin: 3px;
+    padding: 1px;
+    width: 30px;
+    height: 2px;
+}
